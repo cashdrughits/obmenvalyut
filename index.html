@@ -8,13 +8,10 @@
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#060a13">
 <link rel="canonical" href="https://cashdrughits.github.io/obmenvalyut/">
-<!-- ЕСЛИ подключите свой домен — замените canonical и og:url/twitter-ссылки ниже на него -->
 
-<!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
 
-<!-- Open Graph / соцсети (ВКонтакте, Telegram, WhatsApp и т.п.) -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Обмен Валют">
@@ -25,7 +22,6 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<!-- Twitter/X Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Обмен Валют — честный курс без комиссий">
 <meta name="twitter:description" content="Круглосуточный обмен валют на проспекте Вернадского, 29, Москва. Без скрытых комиссий.">
@@ -35,7 +31,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Структурированные данные для поиска (Google, Яндекс) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -69,8 +64,8 @@
     "reviewCount": "55"
   },
   "sameAs": [
-    "https://wa.me/vernadka29",
-    "https://telegram.me/vernadka29"
+    "https://wa.me/vernadka29?text=Здравствуйте, хочу заказать обмен",
+    "https://t.me/vernadka29"
   ]
 }
 </script>
@@ -83,16 +78,16 @@
     --line: #1d2a45;
     --line-soft: #16203a;
 
-    --accent: #4c7dff;       /* основной синий акцент */
+    --accent: #4c7dff;       
     --accent-dim: #2f4fb8;
-    --accent-soft: #7c96d9;  /* приглушённый синий для лейблов */
-    --gold: #e8ab4c;         /* тёплый акцент для "продажи" и партнёрки */
+    --accent-soft: #7c96d9;  
+    --gold: #e8ab4c;        
 
     --ink: #e9edf7;
     --muted: #8996b3;
 
-    --buy: #4fc3d0;   /* покупка — холодный сине-бирюзовый */
-    --sell: #e8ab4c;  /* продажа — тёплый золотой, контраст к синему */
+    --buy: #4fc3d0;   
+    --sell: #e8ab4c; 
 
     --radius: 6px;
   }
@@ -142,8 +137,6 @@
   .section-head{ margin-bottom: 40px; max-width: 620px; }
   .section-head h2{ font-size: clamp(24px, 3.4vw, 32px); font-weight: 600; margin-bottom: 10px; }
   .section-head p{ color: var(--muted); font-size: 15.5px; line-height: 1.55; margin:0; }
-
-  /* ---------- Header ---------- */
   header{
     position: sticky; top: 0; z-index: 50;
     background: color-mix(in srgb, var(--bg) 88%, transparent);
@@ -202,8 +195,6 @@
   .btn-gold{ background: var(--gold); color: #2b1c02; }
   .btn-gold:hover{ background: #f0bb66; }
   .btn-wide{ width: 100%; justify-content:center; }
-
-  /* ---------- Hero ---------- */
   .hero{ padding-top: 64px; }
   .hero-grid{
     display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items:center;
@@ -241,8 +232,6 @@
     font-size: 13.5px; color: var(--muted);
   }
   .stars{ color: var(--gold); letter-spacing: 1px; }
-
-  /* Mini board on hero */
   .mini-board{
     border: 1px solid var(--line);
     border-radius: 10px;
@@ -286,7 +275,6 @@
     .hero-grid{ grid-template-columns: 1fr; }
   }
 
-  /* ---------- Stats ---------- */
   .stats{ padding: 44px 0; border-bottom: 1px solid var(--line-soft); }
   .stats-grid{
     display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align:center;
@@ -299,7 +287,6 @@
   .stat-label{ font-size: 13px; color: var(--muted); margin-top:4px; }
   @media (max-width: 640px){ .stats-grid{ grid-template-columns: repeat(2,1fr); row-gap: 28px; } }
 
-  /* ---------- Calculator ---------- */
   .calc-card{
     max-width: 480px; margin: 0 auto;
     border: 1px solid var(--line);
@@ -354,7 +341,6 @@
     margin-bottom: 18px;
   }
 
-  /* ---------- Rate cards ---------- */
   .rates-grid{
     display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
   }
@@ -380,7 +366,6 @@
   .rate-card.unavailable .msg{ font-size:13.5px; color: var(--muted); margin: 10px 0 14px; }
   @media (max-width: 620px){ .rates-grid{ grid-template-columns: 1fr; } }
 
-  /* ---------- Advantages ---------- */
   .adv-grid{
     display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   }
@@ -403,7 +388,6 @@
   @media (max-width: 820px){ .adv-grid{ grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 560px){ .adv-grid{ grid-template-columns: 1fr; } }
 
-  /* ---------- Partner program ---------- */
   .partner-grid{ display:grid; grid-template-columns: 1fr 320px; gap: 48px; align-items:center; }
   .partner-steps{ display:flex; flex-direction:column; gap: 14px; }
   .step-card{
@@ -425,7 +409,6 @@
   .step-card p{ font-size:13.5px; color: var(--muted); margin: 4px 0 0; line-height:1.5; }
   @media (max-width: 820px){ .partner-grid{ grid-template-columns: 1fr; } .partner-art{ order:-1; max-width:220px; margin:0 auto; } }
 
-  /* ---------- Find us ---------- */
   .find-grid{ display:grid; grid-template-columns: 340px 1fr; gap: 24px; }
   .find-card{
     border: 1px solid var(--line);
@@ -449,7 +432,6 @@
   .map-embed iframe{ width:100%; height:100%; min-height:320px; border:0; filter: saturate(0.85); }
   @media (max-width: 820px){ .find-grid{ grid-template-columns: 1fr; } }
 
-  /* ---------- Reviews ---------- */
   .rating-summary{ display:flex; align-items:center; gap:16px; margin-bottom: 32px; }
   .rating-num{ font-family:'Fraunces', serif; font-weight:600; font-size: 40px; }
   .rating-summary .stars{ font-size: 18px; }
@@ -476,7 +458,6 @@
   @media (max-width: 640px){ .reviews-grid{ grid-template-columns: 1fr; } }
   .reviews-more{ text-align:center; margin-top: 26px; }
 
-  /* ---------- Footer ---------- */
   footer{ padding: 48px 0 32px; }
   .footer-grid{
     display:grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px;
@@ -525,8 +506,8 @@
       <h1>Честный курс без скрытых условий и комиссий</h1>
       <p class="lead">Гарантируем честный курс без скрытых комиссий. Прозрачные условия и быстрый обмен рядом с метро. Чтобы узнать актуальный курс — смотрите табло справа или нажмите на кнопку ниже.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://telegram.me/vernadka29" target="_blank" rel="noopener">Написать в Telegram</a>
-        <a class="btn btn-outline" href="https://wa.me/vernadka29" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-primary" href="https://t.me/vernadka29" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn btn-outline" href="https://wa.me/vernadka29?text=Здравствуйте, хочу заказать обмен" target="_blank" rel="noopener">WhatsApp</a>
       </div>
       <div class="hero-trust">
         <span class="stars">★★★★★</span> 5.0 · 55 оценок · просп. Вернадского, 29
@@ -584,7 +565,7 @@
 
       <div class="info-note">💬 Звоните или пишите в мессенджеры — ответим мгновенно.</div>
 
-      <a class="btn btn-primary btn-wide" href="https://telegram.me/vernadka29" target="_blank" rel="noopener">Заказать обмен →</a>
+      <a class="btn btn-primary btn-wide" href="https://t.me/vernadka29" target="_blank" rel="noopener">Заказать обмен →</a>
     </div>
   </div>
 </section>
@@ -717,8 +698,8 @@
           <div><h4>Режим работы</h4><p>Круглосуточно, без выходных</p></div>
         </div>
         <div class="find-links">
-          <a href="https://wa.me/vernadka29" target="_blank" rel="noopener">💬 Написать в WhatsApp</a>
-          <a href="https://telegram.me/vernadka29" target="_blank" rel="noopener">✈️ Написать в Telegram</a>
+          <a href="https://wa.me/vernadka29?text=Здравствуйте, хочу заказать обмен" target="_blank" rel="noopener">💬 Написать в WhatsApp</a>
+          <a href="https://t.me/vernadka29" target="_blank" rel="noopener">✈️ Написать в Telegram</a>
           <a href="https://yandex.ru/maps/213/moscow/house/prospekt_vernadskogo_29/Z04YcwZmTUEOQFtvfXp5cHtiZg==/" target="_blank" rel="noopener">📍 Открыть в Яндекс.Картах</a>
         </div>
       </div>
