@@ -1,0 +1,9 @@
+{
+  "updated_at": null,
+  "source": "manual",
+  "rates": [
+    { "code": "USD", "name": "Доллар США", "buy": 92.10, "sell": 93.50 },
+    { "code": "EUR", "name": "Евро", "buy": 99.00, "sell": 101.20 },
+    { "code": "USDT", "name": "Tether", "buy": 91.50, "sell": 93.00 }
+  ]
+}

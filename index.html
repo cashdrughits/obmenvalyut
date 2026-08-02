@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Курс&nbsp;Дня — обмен валюты</title>
+<meta name="description" content="Актуальные курсы обмена валют. Адрес, часы работы, контакты.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14171b;
+    --panel: #1b2026;
+    --panel-2: #20262d;
+    --line: #2a323b;
+    --gold: #e3b24c;
+    --gold-dim: #a98536;
+    --buy: #4e9b6b;
+    --sell: #c1583f;
+    --ink: #ece7dd;
+    --muted: #8b93a0;
+    --radius: 4px;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(227,178,76,0.07), transparent);
+  }
+  a{ color: var(--gold); }
+
+  .wrap{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 20px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .brand-eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin: 0 0 6px;
+  }
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 5vw, 38px);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .updated{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.6;
+  }
+  .updated .dot{
+    display:inline-block;
+    width:7px; height:7px;
+    border-radius:50%;
+    background: var(--buy);
+    margin-right: 6px;
+    box-shadow: 0 0 6px var(--buy);
+  }
+  .updated.stale .dot{ background: var(--sell); box-shadow: 0 0 6px var(--sell); }
+
+  /* ---------- Board ---------- */
+  .board{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .board-head, .row{
+    display: grid;
+    grid-template-columns: 88px 1fr 110px 110px;
+    align-items: center;
+  }
+  .board-head{
+    padding: 12px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .board-head span:nth-child(3), .board-head span:nth-child(4){ text-align: right; }
+
+  .row{
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .row:last-child{ border-bottom: none; }
+  .row:hover{ background: var(--panel-2); }
+
+  .code{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: .04em;
+    color: var(--gold);
+  }
+  .name{
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .num{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 19px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    position: relative;
+    padding-top: 8px;
+  }
+  .num::before{
+    content: attr(data-label);
+    position: absolute;
+    top: -8px;
+    right: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .num.buy{ color: var(--buy); }
+  .num.sell{ color: var(--sell); }
+
+  .empty-state{
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ---------- Footer / contacts ---------- */
+  .contacts{
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .contacts h3{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin: 0 0 8px;
+  }
+  .contacts p{
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .contacts p.muted{ color: var(--muted); }
+
+  footer{
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (max-width: 520px){
+    .board-head, .row{ grid-template-columns: 60px 1fr 84px 84px; }
+    .board-head span:nth-child(2){ display:none; }
+    .row .name{ display:none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div>
+        <p class="brand-eyebrow">Обмен валюты</p>
+        <!-- ЗАМЕНИТЕ на название вашего обменника -->
+        <h1>Курс&nbsp;Дня</h1>
+      </div>
+      <div class="updated" id="updated">
+        <span class="dot"></span><span id="updated-text">загрузка курсов…</span>
+      </div>
+    </header>
+
+    <div class="board">
+      <div class="board-head">
+        <span>Код</span>
+        <span>Валюта</span>
+        <span>Покупка</span>
+        <span>Продажа</span>
+      </div>
+      <div id="board-body">
+        <div class="empty-state">Загружаем актуальные курсы…</div>
+      </div>
+    </div>
+
+    <div class="contacts">
+      <div>
+        <h3>Адрес</h3>
+        <!-- ЗАМЕНИТЕ на реальный адрес -->
+        <p>г. Москва, ул. Примерная, 10</p>
+        <p class="muted">рядом с м. Примерная</p>
+      </div>
+      <div>
+        <h3>Часы работы</h3>
+        <!-- ЗАМЕНИТЕ на реальные часы -->
+        <p>Пн–Вс: 09:00–21:00</p>
+        <p class="muted">без выходных</p>
+      </div>
+      <div>
+        <h3>Контакты</h3>
+        <!-- ЗАМЕНИТЕ на реальные контакты -->
+        <p><a href="tel:+70000000000">+7 (000) 000-00-00</a></p>
+        <p><a href="https://t.me/your_channel" target="_blank" rel="noopener">Telegram-канал</a></p>
+      </div>
+    </div>
+
+    <footer>
+      Курсы обновляются автоматически из Telegram-канала. Курс на момент визита в кассу уточняйте на месте.
+    </footer>
+
+  </div>
+
+<script>
+(function () {
+  const boardBody = document.getElementById('board-body');
+  const updatedText = document.getElementById('updated-text');
+  const updatedWrap = document.getElementById('updated');
+
+  function fmt(n) {
+    return Number(n).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function formatAge(iso) {
+    if (!iso) return null;
+    const then = new Date(iso).getTime();
+    const diffMin = Math.round((Date.now() - then) / 60000);
+    if (diffMin < 1) return 'обновлено только что';
+    if (diffMin === 1) return 'обновлено 1 минуту назад';
+    if (diffMin < 5) return `обновлено ${diffMin} минуты назад`;
+    if (diffMin < 60) return `обновлено ${diffMin} минут назад`;
+    const h = Math.round(diffMin / 60);
+    return `обновлено ${h} ч назад`;
+  }
+
+  function render(data) {
+    if (!data.rates || !data.rates.length) {
+      boardBody.innerHTML = '<div class="empty-state">Курсы пока не опубликованы.</div>';
+      return;
+    }
+    boardBody.innerHTML = data.rates.map(r => `
+      <div class="row">
+        <div class="code">${r.code}</div>
+        <div class="name">${r.name || r.code}</div>
+        <div class="num buy" data-label="покупка">${fmt(r.buy)}</div>
+        <div class="num sell" data-label="продажа">${fmt(r.sell)}</div>
+      </div>
+    `).join('');
+
+    const age = formatAge(data.updated_at);
+    updatedText.textContent = age || 'время обновления неизвестно';
+
+    // если данные старше 40 минут — считаем их устаревшими и подсвечиваем это
+    const stale = data.updated_at && (Date.now() - new Date(data.updated_at).getTime()) > 40 * 60 * 1000;
+    updatedWrap.classList.toggle('stale', !!stale);
+  }
+
+  function load() {
+    // cache-bust, чтобы браузер не показывал закэшированный старый json
+    fetch('./assets/rates.json?_=' + Date.now())
+      .then(res => {
+        if (!res.ok) throw new Error('rates.json недоступен');
+        return res.json();
+      })
+      .then(render)
+      .catch(() => {
+        boardBody.innerHTML = '<div class="empty-state">Не удалось загрузить курсы. Попробуйте обновить страницу.</div>';
+        updatedText.textContent = 'ошибка загрузки';
+      });
+  }
+
+  load();
+  setInterval(load, 60000); // подтягиваем свежий файл раз в минуту, пока страница открыта
+})();
+</script>
+</body>
+</html>
