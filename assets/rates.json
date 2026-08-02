@@ -2,8 +2,9 @@
   "updated_at": null,
   "source": "manual",
   "rates": [
-    { "code": "USD", "name": "Доллар США", "buy": 92.10, "sell": 93.50 },
-    { "code": "EUR", "name": "Евро", "buy": 99.00, "sell": 101.20 },
-    { "code": "USDT", "name": "Tether", "buy": 91.50, "sell": 93.00 }
+    { "code": "USD_BLUE", "name": "Доллар США (синий)", "flag": "🇺🇸", "available": true, "buy": 82.00, "sell": 83.00 },
+    { "code": "USD_WHITE", "name": "Доллар США (белый)", "flag": "🇺🇸", "available": true, "buy": 79.00, "sell": 81.50 },
+    { "code": "EUR", "name": "Евро", "flag": "🇪🇺", "available": true, "buy": 94.00, "sell": 95.00 },
+    { "code": "CNY", "name": "Юань", "flag": "🇨🇳", "available": false, "buy": null, "sell": null }
   ]
 }
