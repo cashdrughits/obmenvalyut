@@ -1,10 +1,38 @@
 {
-  "updated_at": null,
-  "source": "manual",
+  "updated_at": "2026-08-02T19:53:20Z",
+  "source": "telegram:@obmenvalyuttt",
   "rates": [
-    { "code": "USD_BLUE", "name": "Доллар США (синий)", "flag": "🇺🇸", "available": true, "buy": 82.00, "sell": 83.00 },
-    { "code": "USD_WHITE", "name": "Доллар США (белый)", "flag": "🇺🇸", "available": true, "buy": 79.00, "sell": 81.50 },
-    { "code": "EUR", "name": "Евро", "flag": "🇪🇺", "available": true, "buy": 94.00, "sell": 95.00 },
-    { "code": "CNY", "name": "Юань", "flag": "🇨🇳", "available": false, "buy": null, "sell": null }
+    {
+      "available": true,
+      "buy": 82.0,
+      "sell": 83.0,
+      "code": "USD_BLUE",
+      "name": "Доллар США (синий)",
+      "flag": "🇺🇸"
+    },
+    {
+      "available": true,
+      "buy": 79.0,
+      "sell": 81.5,
+      "code": "USD_WHITE",
+      "name": "Доллар США (белый)",
+      "flag": "🇺🇸"
+    },
+    {
+      "available": true,
+      "buy": 94.0,
+      "sell": 95.0,
+      "code": "EUR",
+      "name": "Евро",
+      "flag": "🇪🇺"
+    },
+    {
+      "available": true,
+      "buy": 96.0,
+      "sell": 97.1,
+      "code": "CNY",
+      "name": "Юань",
+      "flag": "🇨🇳"
+    }
   ]
 }
