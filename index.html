@@ -179,7 +179,6 @@
     nav{ display:none; }
   }
 
-  /* ---------- Buttons ---------- */
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     padding: 12px 20px;
@@ -754,13 +753,12 @@
         <div class="footer-contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.3 2"/></svg> Круглосуточно, без выходных</div>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 Обмен Валют — обмен валюты в Москве</div>
+    <div class="footer-bottom">© 2026 Обмен валюты в Москве</div>
   </div>
 </footer>
 
 <script>
 (function () {
-  /* ============ ТЕМА (без localStorage — сбрасывается при обновлении страницы) ============ */
   const body = document.body;
   const themeToggle = document.getElementById('themeToggle');
   const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
@@ -770,15 +768,18 @@
     body.setAttribute('data-theme', next);
   });
 
-  /* ============ ОТЗЫВЫ — статический массив, редактируется вручную ============
-     ЗАМЕНИТЕ этот массив на реальные ~10 отзывов в этом же формате.
-     Поле avatar можно оставить пустым "" — тогда покажутся инициалы. */
-  const REVIEWS = [
-    { name: "Иван П.", date: "22 июня", avatar: "", text: "Решил обменять доллары перед поездкой — курс честный, обслужили быстро, без лишних вопросов." },
-    { name: "Анастасия К.", date: "15 июня", avatar: "", text: "Обмен занял пару минут, всё прозрачно объяснили. Место легко найти рядом с метро." },
-    { name: "Матвей Ш.", date: "28 марта", avatar: "", text: "Обслуживание быстрое и вежливое. Курс валют полностью устроил, обязательно вернусь ещё." },
-    { name: "Дарья С.", date: "20 апреля", avatar: "", text: "Приятно удивил честный курс без скрытых комиссий. Рекомендую тем, кто ценит своё время." },
-  ];
+const REVIEWS = [
+  { name: "Игорь С.", date: "10 июня", avatar: "https://avatars.mds.yandex.net/get-yapic/53031/0c-3/islands-75", text: "Отличный пункт обмена валюты. Самый выгодный курс. Все оперативно, понятно и удобно." },
+  { name: "Andrey G.", date: "13 мая", avatar: "https://avatars.mds.yandex.net/get-yapic/26311/0t-3/islands-75", text: "Не первый раз меняю, всё ок" },
+  { name: "Никита М.", date: "7 мая", avatar: "https://avatars.mds.yandex.net/get-yapic/50595/0h-3/islands-75", text: "Отличный курс, отличный обменник, клиентоориентированности на высшем уровне!" },
+  { name: "Максим Б.", date: "12 апреля", avatar: "https://avatars.mds.yandex.net/get-yapic/47747/7yy2zn9Ga8wdQxiheZoWxuW8jds-1/islands-75", text: "Клёвый обменник, приятный курс и отношение к клиентам, все понравилось однозначно рекомендую (:" },
+  { name: "Александр", date: "23 марта", avatar: "https://avatars.mds.yandex.net/get-yapic/18057972/zSfeaaLtorsZOzCIjEk7ucXFk-1/islands-75", text: "Самый выгодный курс в Москве, очень добрый сотрудники." },
+  { name: "Карпачев Михаил", date: "9 февраля", avatar: "https://avatars.mds.yandex.net/get-yapic/57243/0b-1/islands-75", text: "Отличный пункт обмена. Зашел, поменял, ушел — всё заняло 5 минут. Курс выгодный, кассир адекватный. Есть счетчик банкнот и проверка на подлинность. Всё прозрачно, никаких лишних вопросов и навязанных услуг. Буду обращаться еще" },
+  { name: "Виктория", date: "4 февраля", avatar: "https://avatars.mds.yandex.net/get-yapic/53031/Gm4uJkjn00jb7ub3PaFt5Vyl14-1/islands-75", text: "Все четко. Рекомендую" },
+  { name: "Карина Рудовская", date: "3 февраля", avatar: "https://avatars.mds.yandex.net/get-yapic/68143/0l-3/islands-75", text: "Обмен на Вернадского- Рекомендую. Всегда лучший курс. Вежливые кассиры, в любое время можно позвонить и договориться об обмене. Работают 24/7. Неоднократно обращалась." },
+  { name: "Savdyron .", date: "27 января", avatar: "https://avatars.mds.yandex.net/get-yapic/30955/PfG1cbX6Eofr9dmS8m2TUHmuY-1572428600/islands-75", text: "Отличный обменник! Советую всем своим партнерам менять валюту только здесь, и вам того же советую!" },
+  { name: "Даниил Фимин", date: "26 января", avatar: "https://avatars.mds.yandex.net/get-yapic/45131/0y-4/islands-75", text: "Зашел поменял через 2 минуты вышел все здорово" },
+];
 
   function initials(name) {
     return name.split(' ').filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase();
