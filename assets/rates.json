@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-08-03T06:50:43Z",
+  "updated_at": "2026-08-03T10:31:49Z",
   "source": "telegram:@obmenvalyuttt",
   "rates": [
     {
       "available": true,
       "buy": 82.0,
-      "sell": 83.0,
+      "sell": 83.9,
       "code": "USD_BLUE",
       "name": "Доллар США (синий)",
       "flag": "🇺🇸"
@@ -27,9 +27,9 @@
       "flag": "🇪🇺"
     },
     {
-      "available": true,
-      "buy": 96.0,
-      "sell": 97.1,
+      "available": false,
+      "buy": null,
+      "sell": null,
       "code": "CNY",
       "name": "Юань",
       "flag": "🇨🇳"
