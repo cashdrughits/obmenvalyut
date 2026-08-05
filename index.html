@@ -721,7 +721,10 @@
 
   function load() {
     fetch('./assets/rates.json?_=' + Date.now())
-      .then(res => { if (!res.ok) throw new Error('no rates'); return res.json(); })
+      .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status + ' при запросе rates.json');
+        return res.json();
+      })
       .then(data => {
         RATES = data.rates || [];
         renderRatesTable();
@@ -729,8 +732,10 @@
         runCalc();
         document.getElementById('ratesUpdated').textContent = formatAge(data.updated_at);
       })
-      .catch(() => {
-        document.getElementById('ratesTableBody').innerHTML = '<tr><td colspan="3" style="color:var(--sell);">Не удалось загрузить курсы</td></tr>';
+      .catch(err => {
+        console.error('Ошибка загрузки курсов:', err);
+        document.getElementById('ratesTableBody').innerHTML =
+          '<tr><td colspan="3" style="color:var(--sell);">Не удалось загрузить курсы — ' + err.message + '</td></tr>';
       });
   }
 
