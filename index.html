@@ -730,7 +730,8 @@
         renderRatesTable();
         populateCalcCurrencies();
         runCalc();
-        document.getElementById('ratesUpdated').textContent = formatAge(data.updated_at);
+        const ratesUpdatedEl = document.getElementById('ratesUpdated');
+        if (ratesUpdatedEl) ratesUpdatedEl.textContent = formatAge(data.updated_at);
       })
       .catch(err => {
         console.error('Ошибка загрузки курсов:', err);
