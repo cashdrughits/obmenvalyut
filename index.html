@@ -121,8 +121,9 @@
   /* ---------- Scroll-reveal ---------- */
   .reveal{
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+    transform: translateY(26px);
+    transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+    will-change: opacity, transform;
   }
   .reveal.in-view{ opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce){
@@ -197,19 +198,22 @@
   .hero .lead{ color: var(--muted); font-size: 16.5px; line-height:1.65; max-width: 460px; margin: 0 0 32px; }
   .hero-actions{ display:flex; gap: 14px; flex-wrap:wrap; }
 
-  /* Floating hero visual */
+  /* Floating hero visual — сюда вставляется собственное изображение.
+     Показывается только на ПК (на мобильных скрыто, см. медиа-запрос ниже). */
   .hero-visual{
     position: relative;
     display:flex; align-items:center; justify-content:center;
     min-height: 320px;
   }
   .hero-visual .glow{
-    position:absolute; width: 260px; height:260px; border-radius:50%;
-    background: radial-gradient(circle, rgba(76,125,255,0.22), rgba(232,171,76,0.08) 55%, transparent 72%);
+    position:absolute; width: 70%; height:70%; border-radius:50%;
+    background: radial-gradient(circle, rgba(76,125,255,0.18), rgba(232,171,76,0.07) 55%, transparent 72%);
     filter: blur(6px);
   }
-  .hero-visual svg{
-    position:relative; width: 78%; max-width: 320px;
+  .hero-photo{
+    position:relative; width: 100%; max-width: 380px;
+    border-radius: 14px;
+    object-fit: cover;
     animation: floaty 5s ease-in-out infinite;
   }
   @keyframes floaty{
@@ -218,11 +222,10 @@
   }
   @media (max-width: 860px){
     .hero-top{ grid-template-columns: 1fr; }
-    .hero-visual{ order:-1; min-height: 220px; }
-    .hero-visual svg{ max-width: 220px; }
+    .hero-visual{ display:none; }
   }
   @media (prefers-reduced-motion: reduce){
-    .hero-visual svg{ animation: none; }
+    .hero-photo{ animation: none; }
   }
 
   /* ---------- Stat strip ---------- */
@@ -303,8 +306,9 @@
   /* ---------- Advantages — нумерованный список ---------- */
   .list-numbered{ }
   .list-row{
-    display:flex; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line-soft);
-    align-items:baseline;
+    display:flex; gap: 26px; padding: 26px 0; border-bottom: 1px solid var(--line-soft);
+    align-items:center;
+    transition: padding-left .35s cubic-bezier(.16,1,.3,1), background-color .35s ease;
   }
   .list-row:first-child{ border-top: 1px solid var(--line-soft); }
   .list-row:nth-child(1){ transition-delay: 0s; }
@@ -312,12 +316,20 @@
   .list-row:nth-child(3){ transition-delay: .12s; }
   .list-row:nth-child(4){ transition-delay: .18s; }
   .list-row:nth-child(5){ transition-delay: .24s; }
-  .list-row .li-num{ font-family:'IBM Plex Mono', monospace; color: var(--muted-2); font-size: 13px; flex: 0 0 28px; }
-  .list-row .li-title{ font-size: 15.5px; font-weight:600; flex: 0 0 220px; }
+  .list-row .li-num{
+    font-family:'Space Grotesk', sans-serif; font-weight:600;
+    color: var(--line); font-size: 34px; line-height:1; flex: 0 0 48px;
+    transition: color .35s ease;
+  }
+  .list-row .li-title{ font-size: 15.5px; font-weight:600; flex: 0 0 220px; transition: color .35s ease; }
   .list-row .li-text{ font-size: 13.5px; color: var(--muted); line-height:1.6; }
+  .list-row:hover{ padding-left: 10px; }
+  .list-row:hover .li-num{ color: var(--gold); }
+  .list-row:hover .li-title{ color: var(--accent); }
   @media (max-width: 700px){
     .list-row{ flex-wrap:wrap; }
     .list-row .li-title{ flex-basis: 100%; }
+    .list-row:hover{ padding-left: 0; }
   }
 
   /* ---------- Partner program ---------- */
@@ -404,66 +416,8 @@
       </div>
       <div class="hero-visual reveal">
         <div class="glow"></div>
-        <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-          <line x1="287.0" y1="160.0" x2="298.0" y2="160.0" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="286.1" y1="174.7" x2="297.1" y2="176.0" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="283.6" y1="189.3" x2="294.3" y2="191.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="279.3" y1="203.4" x2="289.7" y2="207.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="273.5" y1="217.0" x2="283.3" y2="221.9" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="266.1" y1="229.8" x2="275.3" y2="235.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="257.3" y1="241.6" x2="265.7" y2="248.7" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="247.2" y1="252.4" x2="254.7" y2="260.4" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="235.8" y1="261.9" x2="242.4" y2="270.7" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="223.5" y1="270.0" x2="229.0" y2="279.5" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="210.3" y1="276.6" x2="214.7" y2="286.7" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="196.4" y1="281.7" x2="199.6" y2="292.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="182.1" y1="285.1" x2="184.0" y2="295.9" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="167.4" y1="286.8" x2="168.0" y2="297.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="152.6" y1="286.8" x2="152.0" y2="297.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="137.9" y1="285.1" x2="136.0" y2="295.9" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="123.6" y1="281.7" x2="120.4" y2="292.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="109.7" y1="276.6" x2="105.3" y2="286.7" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="96.5" y1="270.0" x2="91.0" y2="279.5" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="84.2" y1="261.9" x2="77.6" y2="270.7" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="72.8" y1="252.4" x2="65.3" y2="260.4" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="62.7" y1="241.6" x2="54.3" y2="248.7" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="53.9" y1="229.8" x2="44.7" y2="235.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="46.5" y1="217.0" x2="36.7" y2="221.9" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="40.7" y1="203.4" x2="30.3" y2="207.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="36.4" y1="189.3" x2="25.7" y2="191.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="33.9" y1="174.7" x2="22.9" y2="176.0" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="33.0" y1="160.0" x2="22.0" y2="160.0" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="33.9" y1="145.3" x2="22.9" y2="144.0" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="36.4" y1="130.7" x2="25.7" y2="128.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="40.7" y1="116.6" x2="30.3" y2="112.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="46.5" y1="103.0" x2="36.7" y2="98.1" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="53.9" y1="90.2" x2="44.7" y2="84.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="62.7" y1="78.4" x2="54.3" y2="71.3" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="72.8" y1="67.6" x2="65.3" y2="59.6" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="84.2" y1="58.1" x2="77.6" y2="49.3" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="96.5" y1="50.0" x2="91.0" y2="40.5" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="109.7" y1="43.4" x2="105.3" y2="33.3" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="123.6" y1="38.3" x2="120.4" y2="27.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="137.9" y1="34.9" x2="136.0" y2="24.1" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="152.6" y1="33.2" x2="152.0" y2="22.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="167.4" y1="33.2" x2="168.0" y2="22.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="182.1" y1="34.9" x2="184.0" y2="24.1" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="196.4" y1="38.3" x2="199.6" y2="27.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="210.3" y1="43.4" x2="214.7" y2="33.3" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="223.5" y1="50.0" x2="229.0" y2="40.5" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="235.8" y1="58.1" x2="242.4" y2="49.3" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="247.2" y1="67.6" x2="254.7" y2="59.6" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="257.3" y1="78.4" x2="265.7" y2="71.3" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="266.1" y1="90.2" x2="275.3" y2="84.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="273.5" y1="103.0" x2="283.3" y2="98.1" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="279.3" y1="116.6" x2="289.7" y2="112.8" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="283.6" y1="130.7" x2="294.3" y2="128.2" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="286.1" y1="145.3" x2="297.1" y2="144.0" stroke="#e8ab4c" stroke-width="1.6" stroke-linecap="round"/>
-          <circle cx="160" cy="160" r="112" fill="none" stroke="#4c7dff" stroke-width="1.4" opacity="0.9"/>
-          <circle cx="160" cy="160" r="80" fill="none" stroke="#1d2a45" stroke-width="1"/>
-          <path d="M120 148h58l-14-14" fill="none" stroke="#e9edf7" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M200 172h-58l14 14" fill="none" stroke="#e9edf7" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
-        </svg>
+        <!-- ЗАМЕНИТЕ на своё изображение: положите файл в assets/ (например assets/hero-photo.jpg) и поправьте src -->
+        <img class="hero-photo" src="./assets/hero-photo.jpg" alt="Обмен Валют">
       </div>
     </div>
   </div>
@@ -483,7 +437,7 @@
         <p class="eyebrow">Курсы</p>
         <h2>Актуальные курсы валют</h2>
       </div>
-      <p class="note">Курс без скрытых комиссий. Для крупных сумм — индивидуальные условия по звонку.</p>
+      <p class="note">Курс без скрытых комиссий. Для крупных сумм — индивидуальные условия по звонку.<br><span id="ratesUpdated" style="font-family:'IBM Plex Mono', monospace; font-size:11.5px; color: var(--muted-2);"></span></p>
     </div>
     <table class="rate-table reveal">
       <thead><tr><th>Валюта</th><th class="num">Покупка</th><th class="num">Продажа</th></tr></thead>
@@ -758,6 +712,14 @@
   document.getElementById('calcAmount').addEventListener('input', runCalc);
   document.getElementById('calcCurrency').addEventListener('change', runCalc);
 
+  function formatAge(iso) {
+    if (!iso) return '';
+    const diffMin = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+    if (diffMin < 1) return 'обновлено только что';
+    if (diffMin < 60) return `обновлено ${diffMin} мин назад`;
+    return `обновлено ${Math.round(diffMin / 60)} ч назад`;
+  }
+
   function load() {
     fetch('./assets/rates.json?_=' + Date.now())
       .then(res => { if (!res.ok) throw new Error('no rates'); return res.json(); })
@@ -766,6 +728,7 @@
         renderRatesTable();
         populateCalcCurrencies();
         runCalc();
+        document.getElementById('ratesUpdated').textContent = formatAge(data.updated_at);
       })
       .catch(() => {
         document.getElementById('ratesTableBody').innerHTML = '<tr><td colspan="3" style="color:var(--sell);">Не удалось загрузить курсы</td></tr>';
@@ -784,9 +747,15 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    // Стартуем наблюдение через пару кадров после отрисовки — иначе элементы,
+    // видимые сразу при загрузке (актуально для широких ПК-экранов), получают
+    // класс in-view раньше, чем браузер успевает отрисовать исходное скрытое
+    // состояние, и анимация визуально "не срабатывает".
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }));
   } else {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
   }
