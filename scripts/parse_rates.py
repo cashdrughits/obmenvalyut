@@ -46,8 +46,21 @@ CURRENCY_INFO = {
     "CNY": {"name": "Юань", "flag": "🇨🇳"},
 }
 
+# Новые строки с номиналом: КОД НОМИНАЛ ПОКУПКА ПРОДАЖА
+# Например: EUR 500 94.00 95.00
+RATE_WITH_DENOMINATION_RE = re.compile(
+    r"^\s*([A-Za-zА-Яа-я_]{2,12})\s+(\d+(?:[.,]\d+)?)\s+([0-9]+[.,][0-9]+)\s+([0-9]+[.,][0-9]+)\s*$"
+)
+
+# Старый формат остаётся поддержанным: КОД ПОКУПКА ПРОДАЖА
 RATE_LINE_RE = re.compile(
     r"^\s*([A-Za-zА-Яа-я_]{2,12})\s+([0-9]+[.,][0-9]+)\s+([0-9]+[.,][0-9]+)\s*$"
+)
+
+# Недоступная валюта: КОД - или КОД НОМИНАЛ -
+UNAVAILABLE_WITH_DENOMINATION_RE = re.compile(
+    r"^\s*([A-Za-zА-Яа-я_]{2,12})\s+(\d+(?:[.,]\d+)?)\s+(-|нет|недоступ\w*)\s*$",
+    re.IGNORECASE,
 )
 UNAVAILABLE_LINE_RE = re.compile(
     r"^\s*([A-Za-zА-Яа-я_]{2,12})\s+(-|нет|недоступ\w*)\s*$", re.IGNORECASE
@@ -87,20 +100,41 @@ def parse_rates(message_text: str) -> list[dict]:
         code = None
         entry = None
 
-        m = RATE_LINE_RE.match(raw_line)
+        m = RATE_WITH_DENOMINATION_RE.match(raw_line)
         if m:
-            code, buy_raw, sell_raw = m.groups()
+            code, denomination_raw, buy_raw, sell_raw = m.groups()
             code = code.upper()
             entry = {
                 "available": True,
+                "denomination": float(denomination_raw.replace(",", ".")),
                 "buy": float(buy_raw.replace(",", ".")),
                 "sell": float(sell_raw.replace(",", ".")),
             }
         else:
-            m = UNAVAILABLE_LINE_RE.match(raw_line)
+            m = RATE_LINE_RE.match(raw_line)
             if m:
-                code = m.group(1).upper()
-                entry = {"available": False, "buy": None, "sell": None}
+                code, buy_raw, sell_raw = m.groups()
+                code = code.upper()
+                entry = {
+                    "available": True,
+                    "buy": float(buy_raw.replace(",", ".")),
+                    "sell": float(sell_raw.replace(",", ".")),
+                }
+            else:
+                m = UNAVAILABLE_WITH_DENOMINATION_RE.match(raw_line)
+                if m:
+                    code = m.group(1).upper()
+                    entry = {
+                        "available": False,
+                        "denomination": float(m.group(2).replace(",", ".")),
+                        "buy": None,
+                        "sell": None,
+                    }
+                else:
+                    m = UNAVAILABLE_LINE_RE.match(raw_line)
+                    if m:
+                        code = m.group(1).upper()
+                        entry = {"available": False, "buy": None, "sell": None}
 
         if not entry:
             continue
