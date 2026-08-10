@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T18:00:27Z",
+  "updated_at": "2026-08-10T19:05:52Z",
   "source": "telegram:@kursvernadka247",
   "rates": [
     {
@@ -24,6 +24,14 @@
       "sell": 95.06,
       "code": "EUR",
       "name": "Евро",
+      "flag": "🇪🇺"
+    },
+    {
+      "available": true,
+      "buy": 93.55,
+      "sell": 94.4,
+      "code": "EUR500",
+      "name": "Евро (купюра 500 €)",
       "flag": "🇪🇺"
     },
     {
