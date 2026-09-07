@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-09-07T16:59:14Z",
+  "updated_at": "2026-09-07T20:26:05Z",
   "source": "telegram:@kursvernadka247",
   "rates": [
     {
       "available": true,
-      "buy": 86.0,
-      "sell": 87.5,
+      "buy": 87.5,
+      "sell": 88.3,
       "code": "USD_BLUE",
       "name": "Доллар США (синий)",
       "flag": "🇺🇸"
@@ -13,31 +13,31 @@
     {
       "available": true,
       "buy": 85.0,
-      "sell": 87.0,
+      "sell": 88.0,
       "code": "USD_WHITE",
       "name": "Доллар США (белый)",
       "flag": "🇺🇸"
     },
     {
       "available": true,
-      "buy": 98.0,
-      "sell": 100.5,
+      "buy": 101.0,
+      "sell": 102.0,
       "code": "EUR",
       "name": "Евро",
       "flag": "🇪🇺"
     },
     {
       "available": true,
-      "buy": 96.0,
-      "sell": 100.0,
+      "buy": 100.0,
+      "sell": 101.5,
       "code": "EUR500",
       "name": "Евро (купюра 500 €)",
       "flag": "🇪🇺"
     },
     {
-      "available": true,
-      "buy": 12.0,
-      "sell": 14.2,
+      "available": false,
+      "buy": null,
+      "sell": null,
       "code": "CNY",
       "name": "Юань",
       "flag": "🇨🇳"
