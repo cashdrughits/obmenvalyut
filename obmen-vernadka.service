@@ -1,0 +1,22 @@
+[Unit]
+Description=Обмен Валют (obmen-vernadka.ru) — Flask-приложение
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/obmen-vernadka/admin
+Environment="SECRET_KEY=ЗАМЕНИТЕ_НА_СЛУЧАЙНУЮ_СТРОКУ"
+Environment="ADMIN_PASSWORD=admin123"
+Environment="PORT=5001"
+ExecStart=/opt/obmen-vernadka/venv/bin/gunicorn \
+    --workers 2 \
+    --bind 127.0.0.1:5001 \
+    --access-logfile /var/log/obmen-vernadka/access.log \
+    --error-logfile  /var/log/obmen-vernadka/error.log \
+    app:app
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -729,7 +729,7 @@
   }
 
   function load() {
-    fetch('./assets/rates.json?_=' + Date.now())
+    fetch('/api/rates?_=' + Date.now())
       .then(res => {
         if (!res.ok) throw new Error('HTTP ' + res.status + ' при запросе rates.json');
         return res.json();
