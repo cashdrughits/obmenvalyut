@@ -22,9 +22,6 @@ DB_PATH  = BASE_DIR / "rates.db"
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "change-me-in-production-please")
 
-# ──────────────────────────────────────────────
-# Базовые валюты (используются при первом запуске)
-# ──────────────────────────────────────────────
 DEFAULT_CURRENCIES = [
     {"code": "USD_BLUE",  "name": "Доллар США (синий)",      "flag": "🇺🇸", "sort_order": 1},
     {"code": "USD_WHITE", "name": "Доллар США (белый)",      "flag": "🇺🇸", "sort_order": 2},
@@ -32,11 +29,6 @@ DEFAULT_CURRENCIES = [
     {"code": "EUR500",    "name": "Евро (купюра 500 €)",     "flag": "🇪🇺", "sort_order": 4},
     {"code": "CNY",       "name": "Юань",                    "flag": "🇨🇳", "sort_order": 5},
 ]
-
-# ──────────────────────────────────────────────
-# БД
-# ──────────────────────────────────────────────
-
 def get_db():
     if "db" not in g:
         g.db = sqlite3.connect(DB_PATH)
@@ -74,14 +66,12 @@ def init_db():
         );
     """)
 
-    # Создаём дефолтного админа если нет ни одного пользователя
     row = db.execute("SELECT COUNT(*) as cnt FROM users").fetchone()
     if row["cnt"] == 0:
         pwd = generate_password_hash(os.environ.get("ADMIN_PASSWORD", "admin123"))
         db.execute("INSERT INTO users (username, password) VALUES (?, ?)",
                    ("admin", pwd))
 
-    # Заполняем валюты при первом запуске
     for cur in DEFAULT_CURRENCIES:
         db.execute("""
             INSERT OR IGNORE INTO rates
@@ -91,10 +81,6 @@ def init_db():
 
     db.commit()
     db.close()
-
-# ──────────────────────────────────────────────
-# Авторизация
-# ──────────────────────────────────────────────
 
 def login_required(f):
     @wraps(f)
@@ -124,10 +110,6 @@ def logout():
     session.clear()
     return redirect(url_for("login"))
 
-# ──────────────────────────────────────────────
-# Главная страница админки
-# ──────────────────────────────────────────────
-
 @app.route("/admin")
 @app.route("/admin/")
 @login_required
@@ -135,10 +117,6 @@ def dashboard():
     db = get_db()
     rates = db.execute("SELECT * FROM rates ORDER BY sort_order, code").fetchall()
     return render_template("dashboard.html", rates=rates, username=session.get("username"))
-
-# ──────────────────────────────────────────────
-# Сохранение курсов (AJAX POST)
-# ──────────────────────────────────────────────
 
 @app.route("/admin/save", methods=["POST"])
 @login_required
@@ -167,9 +145,6 @@ def save_rates():
     db.commit()
     return jsonify({"ok": True, "saved": len(items), "updated_at": now})
 
-# ──────────────────────────────────────────────
-# Добавление / удаление валюты
-# ──────────────────────────────────────────────
 
 @app.route("/admin/currency/add", methods=["POST"])
 @login_required
@@ -199,10 +174,6 @@ def delete_currency(code):
     db.commit()
     return redirect(url_for("dashboard"))
 
-# ──────────────────────────────────────────────
-# Смена пароля
-# ──────────────────────────────────────────────
-
 @app.route("/admin/change-password", methods=["POST"])
 @login_required
 def change_password():
@@ -228,10 +199,6 @@ def change_password():
                            rates=db.execute("SELECT * FROM rates ORDER BY sort_order").fetchall(),
                            username=session.get("username"),
                            pw_ok="Пароль успешно изменён")
-
-# ──────────────────────────────────────────────
-# Публичный API — отдаёт rates.json для сайта
-# ──────────────────────────────────────────────
 
 @app.route("/api/rates")
 def api_rates():
@@ -274,15 +241,8 @@ def api_rates():
     resp.headers["Access-Control-Allow-Origin"] = "*"
     return resp
 
-# ──────────────────────────────────────────────
-# Запуск
-# ──────────────────────────────────────────────
 
 SITE_ROOT = BASE_DIR.parent
-
-# ──────────────────────────────────────────────
-# Раздача статичного сайта
-# ──────────────────────────────────────────────
 
 @app.route("/")
 def site_index():
