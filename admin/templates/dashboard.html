@@ -20,7 +20,6 @@
   }
   a { color: #4c7dff; text-decoration: none; }
 
-  /* ── Header ── */
   .topbar {
     position: sticky; top: 0; z-index: 50;
     background: rgba(9,13,21,.88);
@@ -36,16 +35,12 @@
   .topbar-right a { color: #929caa; }
   .topbar-right a:hover { color: #ecf0f4; }
 
-  /* ── Layout ── */
   .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
-
-  /* ── Section titles ── */
   .sec-title {
     font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
     color: #4c7dff; font-weight: 600; margin: 0 0 14px;
   }
 
-  /* ── Save bar ── */
   .save-bar {
     position: sticky; top: 58px; z-index: 40;
     background: rgba(9,13,21,.9);
@@ -70,7 +65,6 @@
   .status-ok  { color: #4c7dff; }
   .status-err { color: #f87171; }
 
-  /* ── Rates table ── */
   .rates-card {
     background: #10151e;
     border: 1px solid #222835;
@@ -107,7 +101,6 @@
   .rate-input:focus { border-color: #4c7dff; }
   .rate-input:disabled { opacity: .35; }
 
-  /* Toggle switch */
   .toggle-wrap { display: flex; align-items: center; gap: 8px; }
   .toggle { position: relative; display: inline-block; width: 42px; height: 24px; }
   .toggle input { opacity: 0; width: 0; height: 0; }
@@ -126,11 +119,9 @@
   .toggle input:checked + .slider::before { background: #4c7dff; transform: translateX(18px); }
   .toggle-label { font-size: 12.5px; color: #929caa; }
 
-  /* Available badge */
   .avail-yes { color: #4c7dff; font-size: 12px; font-weight: 600; }
   .avail-no  { color: #929caa; font-size: 12px; }
 
-  /* Delete button */
   .del-btn {
     background: none; border: none; color: #929caa; cursor: pointer;
     font-size: 18px; line-height: 1; padding: 4px 6px; border-radius: 6px;
@@ -138,7 +129,6 @@
   }
   .del-btn:hover { color: #f87171; background: rgba(248,113,113,.1); }
 
-  /* ── Add currency form ── */
   .add-card {
     background: #10151e;
     border: 1px solid #222835;
@@ -167,7 +157,6 @@
   }
   .btn-add:hover { background: #4c7dff; color: #06120f; }
 
-  /* ── Password change ── */
   .pw-card {
     background: #10151e;
     border: 1px solid #222835;
@@ -197,7 +186,6 @@
   .notice-ok  { background: rgba(76,125,255,.12); border: 1px solid rgba(76,125,255,.3); color: #4c7dff; }
   .notice-err { background: rgba(248,113,113,.10); border: 1px solid rgba(248,113,113,.3); color: #f87171; }
 
-  /* Collapsible sections */
   details { margin-bottom: 32px; }
   details summary {
     list-style: none; cursor: pointer;
@@ -212,8 +200,7 @@
 </style>
 </head>
 <body>
-
-<!-- Top bar -->
+ 
 <div class="topbar">
   <div class="topbar-logo">Обмен Валют <span>/ Курсы</span></div>
   <div class="topbar-right">
@@ -222,7 +209,6 @@
   </div>
 </div>
 
-<!-- Sticky save bar -->
 <div class="save-bar">
   <div class="save-bar-info">
     Изменения сохраняются вручную.
@@ -239,7 +225,6 @@
 
 <div class="wrap">
 
-  <!-- ── Rates table ── -->
   <p class="sec-title">Курсы валют</p>
   <div class="rates-card">
     <table id="ratesTable">
@@ -317,7 +302,6 @@
     </table>
   </div>
 
-  <!-- ── Add currency ── -->
   <details>
     <summary>Добавить валюту</summary>
     <div class="add-card">
@@ -339,7 +323,6 @@
     </div>
   </details>
 
-  <!-- ── Change password ── -->
   <details>
     <summary>Сменить пароль</summary>
     <div class="pw-card">
@@ -367,7 +350,7 @@
     </div>
   </details>
 
-</div><!-- /wrap -->
+</div>
 
 <script>
   let hasChanges = false;
@@ -388,7 +371,7 @@
     markChanged();
   }
 
-  // Sync toggle labels on page load
+
   document.querySelectorAll('.vis-toggle').forEach(cb => {
     cb.addEventListener('change', function() {
       this.closest('.toggle-wrap').querySelector('.toggle-label').textContent =
